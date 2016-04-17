@@ -5,6 +5,9 @@
 ###################################################################
 
 # --- HISTORY -----------------------------------------------------
+# 17-apr-16 : for 0.8.0 rc
+#
+# - 0.7.x ---------------------------------------------------------
 # 22-mar-16 : rc 0xff.
 # 01-mar-16 : use build_kernel.conf instead of init_instance.conf
 # 01-mar-16 : msg out.
@@ -38,16 +41,14 @@ function init_instance() {
 
   apt-get install -y ntp
 
+  ### BACKUP ###
+  cp -a /etc /etc.ec2.orig
+
   ### /etc/hosts to disable ipv6 ###
   cp -p /etc/hosts /etc/hosts.orig
   echo "127.0.0.1\tlocalhost\n" > /etc/hosts
 
-  ### BACKUP ###
-  cp -a /etc /etc.ec2.orig
-
-
   ### SWAP ###
-
   cp -p /etc/rc.local /etc/rc.local.orig
 
 cat <<_EOB_ > /etc/rc.local
@@ -96,7 +97,7 @@ function install_and_config_s3cmd () {
 
   install -o root -g root ../assets/s3cfg.north-east-1 /root/.s3cfg
 
-  # change delimiter to space.
+  # change a delimiter to a space.
   sed -i.tmpl -e "s ^access_key\s*=.* access_key=${S3CMD_ACCESS_KEY} g" /root/.s3cfg
   sed -i      -e "s ^secret_key\s*=.* secret_key=${S3CMD_SECRET_KEY} g" /root/.s3cfg
   #sed -i.tmpl -e "s/^access_key\s*=.*/access_key = ${S3CMD_ACCESS_KEY}/g" /root/.s3cfg
