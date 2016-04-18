@@ -9,6 +9,9 @@
 # Run on the account - tensorflow070.
 #
 # --- HISTORY -----------------------------------------------------
+# 18-apr-16 : alpha.
+#
+# --- 0.7.1 -------------------------------------------------------
 # 22-mar-16 : rc 0xff.
 # 08-mar-16 : beta 3.
 # 07-mar-16 : beta 2.
@@ -55,7 +58,7 @@ function show_banner () {
   echo -e  "\tClassCat(R) Deep Learning Service"
   echo -e  "\tCopyright (C) 2016 ClassCat Co.,Ltd. All rights reserved."
   echo -en "\x1b[m"
-  echo -e  "\t\t\x1b[22;34m@Insall TensorFlow\x1b[m: release: rc 0xff (03/22/2016)"
+  echo -e  "\t\t\x1b[22;34m@Insall TensorFlow\x1b[m: release: alpha (04/18/2016)"
   # echo -e  ""
 }
 
@@ -95,14 +98,15 @@ function init () {
 ### TensorFlow 0.7.1
 ###
 
-function clone_and_config_tensorflow071 () {
-  git clone --recurse-submodules https://github.com/tensorflow/tensorflow tensorflow.071
+function clone_and_config_tensorflow080 () {
+  git clone --recurse-submodules https://github.com/tensorflow/tensorflow tensorflow.080
 
-  ln -s tensorflow.071 tensorflow
+  ln -s tensorflow.080 tensorflow
 
   cd tensorflow
 
-  git checkout "v0.7.1"
+  git checkout "v0.8.0rc0"
+  #git checkout "v0.7.1"
 
   TF_UNOFFICIAL_SETTING=1 ./configure
 
@@ -187,9 +191,10 @@ function build_pip_package () {
 ###
 
 function install_tensorflow () {
-  pip install ~/.tf_pip_pkg/tensorflow-0.7.1-py2-none-any.whl
+  pip install ~/.tf_pip_pkg/tensorflow-0.8.0rc0-py2-none-any.whl
+  #pip install ~/.tf_pip_pkg/tensorflow-0.7.1-py2-none-any.whl
   if [ "$?" != 0 ]; then
-    echo "Script aborted. pip install tensorflow-0.7.1-py2-none-any.whl failed."
+    echo "Script aborted. pip install tensorflow-0.8.0rc0-py2-none-any.whl failed."
     exit 1
   fi
 }
@@ -204,7 +209,7 @@ init
 
 cd ~
 
-clone_and_config_tensorflow071
+clone_and_config_tensorflow080
 
 cd ~
 
@@ -220,7 +225,7 @@ install_tensorflow
 
 
 # Backup it further.
-cp -a  ~/.tf_pip_pkg /var/tmp/tf_pip_pkg.071_p2.bak
+cp -a  ~/.tf_pip_pkg /var/tmp/tf_pip_pkg.080.bak
 
 
 echo ""
