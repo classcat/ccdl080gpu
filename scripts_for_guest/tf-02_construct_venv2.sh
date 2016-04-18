@@ -14,6 +14,9 @@
 # o PS1 (01-mar-16)
 #
 # --- HISTORY -----------------------------------------------------
+# 18-apr-16: alpha.
+#
+# --- 071 ---------------------------------------------------------
 # 22-mar-16 : rc 0xff.
 # 22-mar-16 : keras added.
 # 08-mar-16 : beta 3.
@@ -46,7 +49,7 @@ function show_banner () {
   echo -e  "\tClassCat(R) Deep Learning Service"
   echo -e  "\tCopyright (C) 2016 ClassCat Co.,Ltd. All rights reserved."
   echo -en "\x1b[m"
-  echo -e  "\t\t\x1b[22;34m@Construct VirutualEnv 2\x1b[m: release: rc 0xff (03/22/2016)"
+  echo -e  "\t\t\x1b[22;34m@Construct VirutualEnv 2\x1b[m: release: alpha (04/18/2016)"
   # echo -e  ""
 }
 
@@ -87,15 +90,15 @@ function init () {
 ###
 
 function create_venv_container () {
-  virtualenv venv2_tf071
+  virtualenv venv2_tf080
 
   echo "" >> ~/.bashrc
-  echo ". venv2_tf071/bin/activate" >> ~/.bashrc
+  echo ". venv2_tf080/bin/activate" >> ~/.bashrc
 }
 
 
 function pip_install_pkgs () {
-  . venv2_tf071/bin/activate
+  . venv2_tf080/bin/activate
 
   pip install wheel
   if [ "$?" != 0 ]; then
@@ -172,7 +175,7 @@ echo "##########################################################################
 echo "# Script Execution has been completed successfully."
 echo "# 1) Be sure to 'Re-login' to this account to activate a container."
 echo "#" 
-echo "# 2) Then, run tf-03_install_tf071_into_venv2.sh as 'tensorflow' account."
+echo "# 2) Then, run tf-03_install_tf080.sh as 'tensorflow' account."
 echo "#############################################################################"
 echo ""
 
