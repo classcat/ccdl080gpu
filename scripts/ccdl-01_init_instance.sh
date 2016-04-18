@@ -6,6 +6,11 @@
 ###################################################################
 
 # --- HISTORY -----------------------------------------------------
+# 18-apr-16 : alpha.
+# 18-apr-16 : Disable theano/torch accounts.
+# 18-apr-16 : Disable torch pkgs install.
+#
+# --- 071 ---------------------------------------------------------
 # 22-mar-16 : rc 0xff.
 # 22-mar-16 : account: theano, chainer.
 # 08-mar-16 : beta 3.
@@ -51,7 +56,7 @@ function show_banner () {
   echo -e  "\tClassCat(R) Deep Learning Service"
   echo -e  "\tCopyright (C) 2016 ClassCat Co.,Ltd. All rights reserved."
   echo -en "\x1b[m"
-  echo -e  "\t\t\x1b[22;34m@Init Insance\x1b[m: release: rc 0xff (03/22/2016)"
+  echo -e  "\t\t\x1b[22;34m@Init Insance\x1b[m: release: alpha (04/18/2016)"
   # echo -e  ""
 }
 
@@ -75,6 +80,10 @@ function init_instance () {
 
   apt-get install -y ntp
 
+  ### BACKUP ###
+  cp -a /etc /etc.ec2.orig
+
+  ### LOCALE ###
   cp -p /etc/localtime /etc/localtime.orig
   cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
@@ -82,11 +91,7 @@ function init_instance () {
   cp -p /etc/hosts /etc/hosts.orig
   echo "127.0.0.1\tlocalhost\n" > /etc/hosts
 
-  ### BACKUP ###
-  cp -a /etc /etc.ec2.orig
-
   ### SWAP ###
-
   cp -p /etc/rc.local /etc/rc.local.orig
 
   cat <<_EOB_ > /etc/rc.local
@@ -160,6 +165,7 @@ function install_and_config_s3cmd () {
 }
 
 
+
 ###
 ### NVIDIA Driver
 ###
@@ -167,6 +173,7 @@ function install_and_config_s3cmd () {
 function install_pkgs_for_nvidia_driver () {
   apt-get install -y gcc make
 }
+
 
 
 ###
@@ -211,11 +218,12 @@ function install_pkgs_for_bazel () {
 }
 
 
+
 ###
 ### Torch
 ###
 
-function install_pkgs_for_torch () {
+function xxx_install_pkgs_for_torch () {
   add-apt-repository -y ppa:chris-lea/zeromq
   add-apt-repository -y ppa:chris-lea/node.js
 
@@ -228,6 +236,7 @@ function install_pkgs_for_torch () {
             gnuplot-x11 
   # ipython
 }
+
 
 
 ###
@@ -246,20 +255,20 @@ function install_pkgs_for_bro () {
 
 # As a global var to display it later.
 PASSWD_TENSORFLOW=`cat /dev/urandom | tr -dc "0-9" | fold -w 5 | head -n 1`
-PASSWD_THEANO=`cat /dev/urandom | tr -dc "0-9" | fold -w 5 | head -n 1`
-PASSWD_TORCH=`cat /dev/urandom | tr -dc "0-9" | fold -w 5 | head -n 1`
+#PASSWD_THEANO=`cat /dev/urandom | tr -dc "0-9" | fold -w 5 | head -n 1`
+#PASSWD_TORCH=`cat /dev/urandom | tr -dc "0-9" | fold -w 5 | head -n 1`
 
 function add_guest_accounts () {
   #apt-get install -y pwgen
 
   useradd tensorflow -c 'TensorFlow for Python 2' -m -s /bin/bash
-  useradd theano     -c 'Theano for Python 2'     -m -s /bin/bash
-  useradd torch      -c 'Torch'                   -m -s /bin/bash
+  #useradd theano     -c 'Theano for Python 2'     -m -s /bin/bash
+  #useradd torch      -c 'Torch'                   -m -s /bin/bash
   #useradd tensorflow3 -c 'TensorFlow for Python 3' -m -s /bin/bash
 
   echo "tensorflow:ClassCat-${PASSWD_TENSORFLOW}" | chpasswd
-  echo "theano:ClassCat-${PASSWD_THEANO}"         | chpasswd
-  echo "torch:ClassCat-${PASSWD_TORCH}"       | chpasswd
+  #echo "theano:ClassCat-${PASSWD_THEANO}"         | chpasswd
+  #echo "torch:ClassCat-${PASSWD_TORCH}"       | chpasswd
   #echo "tensorflow3:ClassCat-${PASSWD3}" | chpasswd
 }
 
@@ -281,7 +290,8 @@ install_pkgs_for_venv
 
 install_pkgs_for_bazel
 
-install_pkgs_for_torch
+# 18-apr-16 : Disable torch install
+#install_pkgs_for_torch
 
 install_pkgs_for_bro
 
@@ -299,13 +309,11 @@ echo "# Script execution has been completed successfully."
 echo "#"
 echo -e "# 1) Make sure to keep the following password by making a note :"
 echo -e "#        \$PASSWD for TensorFlow is \x1b[22;34m${PASSWD_TENSORFLOW}\x1b[m"
-echo -e "#        \$PASSWD for Theano     is \x1b[22;34m${PASSWD_THEANO}\x1b[m"
-echo -e "#        \$PASSWD for Torch      is \x1b[22;34m${PASSWD_TORCH}\x1b[m"
 echo "#"
 echo "# 2) To enable the latest kernel & a swap file, reboot the instance as follows."
 echo "#        # sync && reboot "
 echo "#"
-echo "# 3) Then, run cctf-02_install_gpu_driver.sh."
+echo "# 3) Then, run ccdl-02_install_gpu_driver.sh."
 echo "################################################################################"
 echo ""
 
