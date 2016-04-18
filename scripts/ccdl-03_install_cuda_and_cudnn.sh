@@ -6,6 +6,9 @@
 ###################################################################
 
 # --- HISTORY -----------------------------------------------------
+# 18-apr-16 : disable theano, torch accounts.
+#
+# --- 071 ---------------------------------------------------------
 # 22-mar-16 : rc 0xff
 # 22-mar-16 : account: theano, chainer
 # 08-mar-16 : beta 3.
@@ -39,7 +42,7 @@ function show_banner () {
   echo -e  "\tClassCat(R) Deep Learning Service"
   echo -e  "\tCopyright (C) 2016 ClassCat Co.,Ltd. All rights reserved."
   echo -en "\x1b[m"
-  echo -e  "\t\t\x1b[22;34m@Install CUDA & cuDNN\x1b[m: release: rc 0xff (03/22/2016)"
+  echo -e  "\t\t\x1b[22;34m@Install CUDA & cuDNN\x1b[m: release: alpha (04/18/2016)"
   # echo -e  ""
 }
 
@@ -114,15 +117,15 @@ function config_bashrc_for_cuda () {
   echo "export PATH=$PATH:\$CUDA_HOME/bin" >> /home/tensorflow/.bashrc
   echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$CUDA_HOME/lib64:/usr/local/cudnn-r4/cuda/lib64" >> /home/tensorflow/.bashrc
 
-  echo "" >> /home/theano/.bashrc
-  echo "export CUDA_HOME=/usr/local/cuda"  >> /home/theano/.bashrc
-  echo "export PATH=$PATH:\$CUDA_HOME/bin" >> /home/theano/.bashrc
-  echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$CUDA_HOME/lib64:/usr/local/cudnn-r4/cuda/lib64" >> /home/theano/.bashrc
+  #echo "" >> /home/theano/.bashrc
+  #echo "export CUDA_HOME=/usr/local/cuda"  >> /home/theano/.bashrc
+  #echo "export PATH=$PATH:\$CUDA_HOME/bin" >> /home/theano/.bashrc
+  #echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$CUDA_HOME/lib64:/usr/local/cudnn-r4/cuda/lib64" >> /home/theano/.bashrc
 
-  echo "" >> /home/torch/.bashrc
-  echo "export CUDA_HOME=/usr/local/cuda"  >> /home/torch/.bashrc
-  echo "export PATH=$PATH:\$CUDA_HOME/bin" >> /home/torch/.bashrc
-  echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$CUDA_HOME/lib64:/usr/local/cudnn-r4/cuda/lib64" >> /home/torch/.bashrc
+  #echo "" >> /home/torch/.bashrc
+  #echo "export CUDA_HOME=/usr/local/cuda"  >> /home/torch/.bashrc
+  #echo "export PATH=$PATH:\$CUDA_HOME/bin" >> /home/torch/.bashrc
+  #echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$CUDA_HOME/lib64:/usr/local/cudnn-r4/cuda/lib64" >> /home/torch/.bashrc
 
   #echo "" >> /home/tensorflow3/.bashrc
   #echo "export CUDA_HOME=/usr/local/cuda"  >> /home/tensorflow3/.bashrc
@@ -169,7 +172,7 @@ echo "#"
 echo "# 1) To enable CUDA 7.5 & cnDNN v4, please reboot the instance"
 echo "#        # sync && reboot "
 echo "#"
-echo "# 2) Then, run cctf04-device_query.sh."
+echo "# 2) Then, run cctdl-04-device_query.sh."
 echo "################################################################"
 echo ""
 
