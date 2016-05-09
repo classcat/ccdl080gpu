@@ -14,7 +14,8 @@
 # o PS1 (01-mar-16)
 #
 # --- HISTORY -----------------------------------------------------
-# 18-apr-16: alpha.
+# 10-may-16 : beta.
+# 18-apr-16 : alpha.
 #
 # --- 071 ---------------------------------------------------------
 # 22-mar-16 : rc 0xff.
@@ -49,7 +50,7 @@ function show_banner () {
   echo -e  "\tClassCat(R) Deep Learning Service"
   echo -e  "\tCopyright (C) 2016 ClassCat Co.,Ltd. All rights reserved."
   echo -en "\x1b[m"
-  echo -e  "\t\t\x1b[22;34m@Construct VirutualEnv 2\x1b[m: release: alpha (04/18/2016)"
+  echo -e  "\t\t\x1b[22;34m@Construct VirutualEnv 2\x1b[m: release: beta (05/10/2016)"
   # echo -e  ""
 }
 
