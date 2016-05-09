@@ -105,7 +105,8 @@ function clone_and_config_tensorflow080 () {
 
   cd tensorflow
 
-  git checkout "v0.8.0rc0"
+  git checkout "v0.8.0"
+  #git checkout "v0.8.0rc0"
   #git checkout "v0.7.1"
 
   TF_UNOFFICIAL_SETTING=1 ./configure
@@ -191,10 +192,11 @@ function build_pip_package () {
 ###
 
 function install_tensorflow () {
-  pip install ~/.tf_pip_pkg/tensorflow-0.8.0rc0-py2-none-any.whl
+  pip install ~/.tf_pip_pkg/tensorflow-0.8.0-py2-none-any.whl
+  #pip install ~/.tf_pip_pkg/tensorflow-0.8.0rc0-py2-none-any.whl
   #pip install ~/.tf_pip_pkg/tensorflow-0.7.1-py2-none-any.whl
   if [ "$?" != 0 ]; then
-    echo "Script aborted. pip install tensorflow-0.8.0rc0-py2-none-any.whl failed."
+    echo "Script aborted. pip install tensorflow-0.8.0-py2-none-any.whl failed."
     exit 1
   fi
 }
